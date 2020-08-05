@@ -1,0 +1,33 @@
+{
+  "name": "pyr",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt build --spa --target-static && nuxt export"
+  },
+  "dependencies": {
+    "@fleekhq/space-client": "^0.1.5",
+    "@metamask/detect-provider": "^1.1.0",
+    "eth-sig-util": "^2.5.3",
+    "ethereumjs-util": "^7.0.3",
+    "it-concat": "^1.0.0",
+    "it-pipe": "^1.1.0",
+    "libp2p": "^0.28.9",
+    "libp2p-bootstrap": "^0.11.0",
+    "libp2p-gossipsub": "^0.4.6",
+    "libp2p-mplex": "^0.9.5",
+    "libp2p-noise": "^1.1.2",
+    "libp2p-secio": "^0.12.6",
+    "libp2p-webrtc-star": "^0.18.6",
+    "libp2p-websockets": "^0.13.6",
+    "nuxt": "^2.14.0",
+    "truffle": "^5.1.37",
+    "web3": "^1.2.11"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2"
+  }
+}
