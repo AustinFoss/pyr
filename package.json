@@ -6,7 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt build --spa --target-static && nuxt export"
+    "generate": "nuxt build --spa --target-static && nuxt generate"
   },
   "dependencies": {
     "@fleekhq/space-client": "^0.1.5",
