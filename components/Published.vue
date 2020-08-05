@@ -1,7 +1,7 @@
 <template>
     <v-row>
         <v-col>       
-            <h3>Published Works : {{ publishedContent.length }}</h3>
+            <h3>Published Works: {{ publishedContent.length }}</h3>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 lg4 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
                     <v-card max-width="344" class="ma-3" color = "grey darken-3">
@@ -12,6 +12,7 @@
                             outlined
                             small
                             color="green"
+                            @click="signMessage(content)"
                             >
                             Download
                             </v-btn> 
@@ -33,7 +34,9 @@ export default {
         ])
     },
     methods: {
-        
+        ...mapActions('web3', [
+            'signMessage',
+        ])
     }
 }
 </script>

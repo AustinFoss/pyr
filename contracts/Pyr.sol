@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.2;
 
+// ERC721, Enumerable, & MetaData
 import "./ERC721.sol";
 
 contract Content is ERC721 {
     // Content MetaData that is not part of the ERC721 MetaData standard
-
     string title;
     uint256 price;
     string encryptedBucket;
     address payable owner;
-
     constructor(string memory _title, uint256 _price, string memory _encryptedBucket, address payable _owner) ERC721(_title, "PYR") public {
         title = _title;
         price = _price;
@@ -31,7 +30,7 @@ contract Content is ERC721 {
             owner
         );
     }
-
+    // _safeMint is called, transfering a token to msg.sender & payment to contract owner
     function purchase() public payable returns(uint256) {
         require(msg.value >= price,"Payment value is less than the content price. Please pay the minimum price.");
         uint256 supply = this.totalSupply();
@@ -40,10 +39,9 @@ contract Content is ERC721 {
         return (supply);
     }
 }
-
+// Factory contract to publish content as a new ERC-721 NFT contract
 contract Pyr {
-
-    // All published content through Pyr has the NFT Contract address mapped to the creator's address
+    // NFT Contract address mapped to the creator's ETH address
     mapping(address => address[]) creatorLibrary;
     // Logs the contentId(NFT Contract Address) and its creator's address
     event ContentPublished(address indexed creator, address contentId);
