@@ -1,13 +1,13 @@
 import { SpaceClient } from '@fleekhq/space-client';
 
 export default {
-    // strict: false,
     state: () => ({
         collectorPageSwitch: false,
         publisherPageSwitch: false,
         client: null,
         publishedContent: [],
         collectedContent: [],
+        collectedContentData: [],
         collectableContent: [],
         resaleTokens: [],
         loadingContent: new Map()
@@ -32,11 +32,15 @@ export default {
         collectContent: (state, contentID) => {
             if(state.collectedContent.includes(contentID) == false) {
                 state.collectedContent.push(contentID)
+                state.collectedContentData.push({contentID: contentID, loading: false})
             }
             console.log(state.collectedContent);
         },
         loadingContent: (state, contentID) => {
-            state.loadingContent.set(contentID, !state.loadingContent.get(contentID))
+            const index = state.collectedContentData.findIndex(function(item) {
+                return item.contentID == contentID
+            })  
+            state.collectedContentData.loading = true;      
         }
     },
     actions: {
@@ -102,35 +106,35 @@ export default {
                 }
             });
         },
-        getContent: async ({state}, received) => { 
-            const bucket = received.bucketName;     
+        getContent: async ({state}, content) => { 
+            const bucket = content.content[0]
             const dirRes = await state.client.listDirectories({
                 bucket,
             });
             const entriesList = dirRes.getEntriesList();
-
             const openFileRes = await state.client.openFile({
                 bucket,
                 path: entriesList[0].getPath(),
             });
             const location = openFileRes.getLocation();
-            const index = state.collectedContent.findIndex(function(content) {
-                return content.tokenId == received.tokenId
+            console.log(location);
+            const index = state.collectedContentData.findIndex(function(item) {
+                return item.contentID == content.contentID
             })
-            state.collectedContent[index].pathToFile = location
-            state.collectedContent[index].loadingContent = false
+            state.collectedContentData[index].pathToFile = location
+            state.collectedContentData[index].loading = false
         },
-        shareBucket: ({state, dispatch}, bucket) => {
-            state.client.shareBucket({ bucket: bucket.bucket })
+        shareBucket: ({state, dispatch}, content) => {
+            state.client.shareBucket({ bucket: content.bucket[0] })
             .then((res) => {
                 const threadInfo = res.getThreadinfo();
                 const sharedBucket = JSON.stringify({
                     key: threadInfo.getKey(),
                     addresses: threadInfo.getAddressesList(),
-                    title: bucket.bucket,
-                    tokenId: bucket.tokenId
+                    content: content.bucket,
+                    contentID: content.contentID
                 })
-                dispatch('libp2p/sendSharedBucket', {requester: bucket.requester, package: sharedBucket}, {root: true})
+                dispatch('libp2p/sendSharedBucket', {requester: content.requester, package: sharedBucket}, {root: true})
             })
             .catch((err) => {
               console.error(err);
@@ -139,19 +143,19 @@ export default {
         joinBucket: ({state, dispatch}, thread) => {
             state.client
             .joinBucket({
-                bucket: thread.title,
+                bucket: thread.content[0],
                 threadInfo: {
                     key: thread.key,
                     addresses: thread.addresses,
                 }
             })
             .then((res) => {
-                dispatch('getContent', {bucketName: thread.title, tokenId: thread.tokenId})
+                dispatch('getContent', thread)
             })
             .catch((err) => {
                 if(err.code == 2) {
                     // bucket already added
-                    dispatch('getContent', {bucketName: thread.title, tokenId: thread.tokenId})
+                    dispatch('getContent', thread)
                 } else {
                     console.error(err);
                 }

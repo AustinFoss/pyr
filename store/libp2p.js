@@ -67,6 +67,7 @@ export default {
                   stream,
                   concat
                 )
+                console.log('got response');
                 dispatch('fleek/joinBucket', JSON.parse(result.toString()), {root: true})
               })
 
@@ -97,6 +98,7 @@ export default {
                 const subscription = await state.p2pNode.pubsub
                 .subscribe(subscribedContent[i], (msg) => {
                     if(msg.from != state.p2pNode.peerId.toB58String()) {
+                        console.log('got message');
                         const received = JSON.parse(msg.data.toString())
                         const verifyThis = {
                             contentID: received.contentID,
@@ -104,7 +106,7 @@ export default {
                             block: received.block,
                             requester: msg.from
                         }
-                        dispatch('web3/verifySig', verifyThis, {root: true});
+                        dispatch('web3/verify', verifyThis, {root: true});
                     }
                 })
                 const sub = {
@@ -119,11 +121,11 @@ export default {
             state.p2pNode.pubsub.publish(content.contentID, Buffer.from(JSON.stringify(content)))
         },
         sendSharedBucket: async ({state}, content) => {
-            // console.log(state.p2pNode.registrar.peerStore.addressBook.data.get(content.requester))
             const { stream } = await state.p2pNode.dialProtocol(
                 '/p2p/'+content.requester,
                 '/sharedBucket'
             );
+            console.log('sending bucket');
             await pipe(
               [content.package],
               stream

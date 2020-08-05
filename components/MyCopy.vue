@@ -17,16 +17,10 @@ export default {
     computed: {
     },
     methods: {
-        
+    },
+    created() {
     },
     data: () => ({
-      items: [
-        {
-          color: '#1F7087',
-          title: 'Supermodel',
-          artist: 'Foster the People',
-        },
-      ],
     }),
 }
 </script>

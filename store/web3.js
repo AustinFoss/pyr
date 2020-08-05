@@ -3,8 +3,6 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import Vue from 'vue';
 import Pyr from '../build/contracts/Pyr.json';
 import Content from '../build/contracts/Content.json';
-var sigUtil = require('eth-sig-util')
-import ethUtil from 'ethereumjs-util'
 
 export default {
     state: () => ({
@@ -121,13 +119,11 @@ export default {
                     console.log(hash)
                 })
                 .then(receipt => {
-                    console.log(receipt);
-                    // let tokenId = receipt.events.Transfer.returnValues.tokenId
                     // dispatch('pushMyToken', tokenId)
                 }).catch(err => {console.log(err);})
             })
         },
-        myCollection: ({state, commit, dispatch}) => {
+        myCollection: ({state, commit}) => {
             state.pyr.contract.getPastEvents('ContentPublished', {
                 fromBlock: 0,
                 toBlock: 'latest'
@@ -159,12 +155,12 @@ export default {
                         signature: sig,
                         block: block.number,
                     }
-                    commit('fleek/loadingContent', signThis, {root:true})
+                    // commit('fleek/loadingContent', signThis, {root:true})
                     dispatch('libp2p/requestContentKey', content, {root: true})        
                 });
             });            
         },
-        verifySig: ({state, dispatch}, verifyThis) => {
+        verify: async ({state, dispatch}, verifyThis) => {
             state.web3.eth.getBlock("latest")
             .then(block => {
                 // If the signature is greater than 20blocks, ~5min, then ignore
@@ -178,25 +174,25 @@ export default {
                             contentID: verifyThis.contentID,
                             requester: verifyThis.requester,
                         }
-                        dispatch('verifyOwner', verifyOwner)                                    
+                        const contentContract = state.content.contract.get(verifyOwner.contentID)
+                        contentContract.methods.balanceOf(verifyOwner.owner)
+                        .call({from: state.currentAccount})
+                        .then(count => {
+                            // Checks if the signing ETH account has a balance with hte NFT contract
+                            if(count > 0) {
+                                contentContract.methods.getContentData()
+                                .call({from: state.currentAccount})
+                                .then(contentData => {
+                                    dispatch('fleek/shareBucket', {bucket: contentData, requester: verifyOwner.requester, contentID: verifyThis.contentID}, {root: true});    
+                                })
+                            }
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        });                   
                     })
                 }
             })            
-        },
-        verifyOwner: async ({state, dispatch}, verifyOwner) => {
-            const contentContract = state.content.contract.get(verifyOwner.contentID)
-            await contentContract.methods.balanceOf(verifyOwner.owner)
-            .call({from: state.currentAccount})
-            .then(count => {
-                // Checks if the signing ETH account has a balance with hte NFT contract
-                if(count > 0) {
-                    console.log("They own the content");
-                    // dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        },
+        }
     }
 }
