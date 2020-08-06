@@ -11,6 +11,7 @@
   "dependencies": {
     "@fleekhq/space-client": "^0.1.5",
     "@metamask/detect-provider": "^1.1.0",
+    "@truffle/hdwallet-provider": "^1.0.40",
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
     "it-concat": "^1.0.0",
@@ -24,6 +25,7 @@
     "libp2p-webrtc-star": "^0.18.6",
     "libp2p-websockets": "^0.13.6",
     "nuxt": "^2.14.0",
+    "remove": "^0.1.5",
     "truffle": "^5.1.37",
     "web3": "^1.2.11"
   },

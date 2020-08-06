@@ -10,7 +10,8 @@ export default {
         web3: null, // Web3 instance after MetaMask provider is passed
         pyr: { // Pyr contract
             abi: Pyr.abi,
-            address: Pyr.networks[5777].address,
+            // address: Pyr.networks[5777].address,
+            address: "0x15D303AA36f8DA44aD5506c01EEDA054f5B9f037", // Ropsten deployment
             contract: null
         },
         content: { // Content ERC-721 NFT contracts
