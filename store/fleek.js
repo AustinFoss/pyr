@@ -147,6 +147,7 @@ export default {
             })
             .then((res) => {
                 // 2. Download Content to local machine
+                console.log('result', res.getResult());
                 dispatch('getContent', thread)
             })
             .catch((err) => {
