@@ -15,17 +15,17 @@
         <v-flex>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/">{{title}}</v-btn>
+              <v-btn outlined color="orange" to="/">{{title}}</v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/publisher">Publisher</v-btn>
+              <v-btn outlined color="orange" to="/publisher">Publisher</v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/collector">Collector</v-btn>
+              <v-btn outlined color="orange" to="/collector">Collector</v-btn>
             </v-col>            
           </v-row>
         </v-flex>

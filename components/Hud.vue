@@ -2,6 +2,7 @@
   <v-layout row wrap>
     <v-flex >
       <v-row v-if="p2pNode != null">
+        <v-col> <img src="../static/pyrLogo.svg" height="50rem" /> </v-col>
         <v-col>Peers: {{ p2pNode.registrar.connectionManager.connections.size }}</v-col>
       </v-row>
       <v-row v-else>Loading</v-row>

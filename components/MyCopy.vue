@@ -13,15 +13,7 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-    props: ['content'],
-    computed: {
-    },
-    methods: {
-    },
-    created() {
-    },
-    data: () => ({
-    }),
+    props: ['content']
 }
 </script>
 

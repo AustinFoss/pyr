@@ -1,7 +1,7 @@
 <template>
     <v-col>
         <h3>Collectable Works</h3>
-        <v-btn outlined small color="green" @click="getCollectables()">Browse Content Library</v-btn>
+        <v-btn outlined small color="orange" @click="getCollectables()">Browse Content Library</v-btn>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="collectable in collectableContent" :key="collectableContent.indexOf(collectable)">
                 <v-card max-width="344" class="ma-3" color = "grey darken-3">
@@ -15,7 +15,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="orange"
                         @click="purchase(collectable.returnValues[1])"
                         >
                         Collect

@@ -10,7 +10,7 @@
                         <v-btn
                             small 
                             outlined 
-                            color="green" 
+                            color="orange" 
                             @click="signMessage(content)"
                         >Download</v-btn>                        
                     </v-card-actions>
