@@ -135,6 +135,7 @@ export default {
         },
         // Joins requested bucket from the returned information
         joinBucket: ({state, dispatch}, thread) => {
+            console.log('joining bucket');            
             // 1. Join bucket
             state.client
             .joinBucket({
@@ -159,6 +160,7 @@ export default {
         },
         // Downloads content to local machine returning the file path location
         getContent: async ({state}, content) => { 
+            console.log('getting content');
             const bucket = content.content[0] // Bucket Name
             const dirRes = await state.client.listDirectories({
                 bucket,
