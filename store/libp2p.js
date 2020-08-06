@@ -135,6 +135,7 @@ export default {
                 '/p2p/'+content.requester, // Peer to dial
                 '/sharedBucket' // Dial protocol
             );
+            console.log("Responding");
             // Pipe the content package over the stream to the requesting peer
             await pipe(
               [content.package],
