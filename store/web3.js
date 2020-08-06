@@ -11,7 +11,7 @@ export default {
         pyr: { // Pyr contract
             abi: Pyr.abi,
             // address: Pyr.networks[5777].address,
-            address: "0x5BC825708151040d26678E0E35cAaD9E75493485", // Ropsten deployment
+            address: "0x1C0E5633CBc6c9F139c08A42fB62FdfC8EfD7df7", // Ropsten deployment
             contract: null
         },
         content: { // Content ERC-721 NFT contracts
