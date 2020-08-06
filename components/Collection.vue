@@ -7,8 +7,7 @@
                     <MyCopy v-bind:content="content"/> 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <p v-if="loadingContent.get(content)==true">Loading</p>
-                        <v-btn v-else 
+                        <v-btn
                             small 
                             outlined 
                             color="green" 
@@ -26,8 +25,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
     computed: {
         ...mapState('fleek', [
-            'collectedContent',
-            'loadingContent'
+            'collectedContent'
         ])
     },
     methods: {
