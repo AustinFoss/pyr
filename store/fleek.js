@@ -165,11 +165,14 @@ export default {
             const dirRes = await state.client.listDirectories({
                 bucket,
             });
+            console.log(dirRes);
             const entriesList = dirRes.getEntriesList();
+            console.log(entriesList);
             const openFileRes = await state.client.openFile({
                 bucket,
                 path: entriesList[0].getPath(),
             });
+            console.log(openFileRes);
             const location = openFileRes.getLocation();
             const index = state.collectedContentData.findIndex(function(item) {
                 return item.contentID == content.contentID
