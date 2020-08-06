@@ -60,7 +60,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.2+commit.bacdbe57\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"contentId\",\"type\":\"address\"}],\"name\":\"ContentPublished\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"}],\"name\":\"getCreatorLibrary\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_title\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_encryptedBucket\",\"type\":\"string\"}],\"name\":\"newContent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/foss/gits/pyr/contracts/Pyr.sol\":\"Pyr\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/foss/gits/pyr/contracts/ERC721.sol\":{\"keccak256\":\"0x3449e2a54bec699bc07fdef522c311d3359c737468bde74c8e34b78f8c15066e\",\"urls\":[\"bzz-raw://55952a8e11a35538de5e0bdbbadb7dda4c089f0c6843b0b45d1d251b6e747c05\",\"dweb:/ipfs/QmWsQbhQcZhcDiV3gp5gfmfTPcuMjBC1iFyB8MadqczcTh\"]},\"/home/foss/gits/pyr/contracts/Pyr.sol\":{\"keccak256\":\"0xbdc9c7065e35ecf68feaded38536f83cd6ed9ec21ba3705341cce85e2ac31b85\",\"urls\":[\"bzz-raw://3db8eb71b3da99bc3ddc65cd0a2adaa5f88ccf834f7a683c857ad14adf7228f6\",\"dweb:/ipfs/Qme3yXsxaSXuRmCK65sgAZtG3btHiCnXXMrpU8SEGob6W1\"]}},\"version\":1}",
@@ -4376,12 +4377,13 @@
         }
       },
       "links": {},
-      "address": "0x81A4Fe3a9fe7DC59B6146fF53E3b897DB1D2DECc",
-      "transactionHash": "0x7f1db9bdc19b06ebeb33e9b569c35dadfac96192328668ef3b2bc091bf65447e"
+      "address": "0x18d71A75eaB57ac28550e3e79f1A6B4Ea00B5DE8",
+      "transactionHash": "0x614cbbbb81f8b4c2f0b2f8619fc890b5fe35191a7b417fc526112bfd76c8ce04"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-05T23:43:41.176Z",
+  "updatedAt": "2020-08-06T18:10:12.768Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
